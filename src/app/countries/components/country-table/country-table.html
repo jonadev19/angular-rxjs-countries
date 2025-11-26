@@ -1,0 +1,99 @@
+@if (countries.length === 0) {
+<div class="max-w-2xl mx-auto">
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl shadow-2xl p-8 text-white text-center">
+        <div class="text-6xl mb-4">🔍</div>
+        <p class="text-2xl font-bold mb-2">¡Comienza tu búsqueda!</p>
+        <p class="text-blue-100 text-lg">Escribe el nombre de una capital en el buscador para descubrir países
+            increíbles.</p>
+    </div>
+</div>
+} @else {
+<div class="overflow-hidden">
+    <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+
+        <!-- Table Header -->
+        <div class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 px-6 py-4">
+            <h2 class="text-white text-xl font-bold flex items-center gap-2">
+                <span>📊</span>
+                <span>Resultados encontrados: {{ countries.length }}</span>
+            </h2>
+        </div>
+
+        <!-- Table Content -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto">
+                <thead class="bg-gradient-to-r from-gray-50 to-gray-100 border-b-2 border-gray-200">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">#</th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Bandera
+                        </th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">País
+                        </th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Capital
+                        </th>
+                        <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                            Población</th>
+                        <th class="px-6 py-4 text-right text-xs font-bold text-gray-700 uppercase tracking-wider">
+                            Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody class="bg-white divide-y divide-gray-100">
+                    @for (country of countries; track $index) {
+                    <tr
+                        class="hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all duration-300 group">
+
+                        <!-- Index -->
+                        <td class="px-6 py-5">
+                            <div
+                                class="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold shadow-lg group-hover:scale-110 transition-transform">
+                                {{ $index + 1 }}
+                            </div>
+                        </td>
+
+                        <!-- Flag -->
+                        <td class="px-6 py-5">
+                            <img src="{{ country.flags?.svg }}" [alt]="country.name.common"
+                                class="h-12 w-16 object-cover rounded-lg shadow-md border-2 border-white group-hover:shadow-xl group-hover:scale-110 transition-all duration-300" />
+                        </td>
+
+                        <!-- Country Name -->
+                        <td class="px-6 py-5">
+                            <div class="font-bold text-gray-900 text-lg group-hover:text-purple-700 transition-colors">
+                                {{ country.name.common }}
+                            </div>
+                        </td>
+
+                        <!-- Capital -->
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl">🏛️</span>
+                                <span class="text-gray-700 font-medium">{{ country.capital || '—' }}</span>
+                            </div>
+                        </td>
+
+                        <!-- Population -->
+                        <td class="px-6 py-5">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl">👥</span>
+                                <span class="font-mono text-gray-800 font-semibold">{{ country.population | number
+                                    }}</span>
+                            </div>
+                        </td>
+
+                        <!-- Action Button -->
+                        <td class="px-6 py-5 text-right">
+                            <a [routerLink]="['/by', country.cca3]"
+                                class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group-hover:from-purple-600 group-hover:to-pink-600">
+                                <span>Ver detalles</span>
+                                <span class="text-lg">→</span>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+}

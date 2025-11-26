@@ -1,0 +1,29 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Header Section -->
+        <div class="mb-8 text-center">
+            <div class="inline-flex items-center gap-3 mb-4">
+                <span class="text-5xl animate-bounce">🌍</span>
+                <h1
+                    class="text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    Explorador de Países
+                </h1>
+            </div>
+            <p class="text-gray-600 text-lg">Descubre información detallada sobre países de todo el mundo</p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="mb-10 max-w-3xl mx-auto">
+            <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-white/20">
+                <label class="block text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wide">
+                    🔍 Buscar por Capital
+                </label>
+                <shared-search-box (onDebounce)="searchByCapital($event)"
+                    placeholder="Escribe el nombre de una capital... (ej: Madrid, Paris, Tokyo)" />
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <country-table [countries]="countries()" />
+    </div>
+</div>
